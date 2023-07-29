@@ -15,6 +15,6 @@ public class ProductPage extends BasePage{
 
     private By productTitle = By.id("productTitle");
     public String getProductTitle() {
-        return getTextFromElement(productTitle).trim().substring(0,50);
+        return getTextFromElement(productTitle).trim().substring(0,30);
     }
 }

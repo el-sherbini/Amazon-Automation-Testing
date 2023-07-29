@@ -20,7 +20,7 @@ public class AddingTodayDealsWithCategories {
     private TodayDealsPage todayDealsPage;
     private ProductPage productPage;
     private CartPage cartPage;
-    private String productTitle;
+    private String expectedResult, actualResult, productTitle;
 
     @BeforeTest
     public void setup() {
@@ -43,20 +43,32 @@ public class AddingTodayDealsWithCategories {
 
     @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testOpenTodayDeals")
     public void testSelectCategories(){
+        actualResult = todayDealsPage.getPageTitle();
+        expectedResult = "Today's Deals";
+
         todayDealsPage.clickHeadphonesCheckBox();
         todayDealsPage.clickGroceryCheckBox();
         todayDealsPage.clickDiscountBtn();
+
+        Assert.assertEquals(actualResult, expectedResult, "Page title is wrong");
     }
 
     @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSelectCategories")
     public void testSelectFourthPage(){
         todayDealsPage.clickFourthPageBtn();
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(todayDealsPage.getSelectedPageNo(), "4", "The selected page is wrong");
     }
 
     @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSelectFourthPage")
     public void testSelectProduct() {
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

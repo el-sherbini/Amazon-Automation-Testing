@@ -13,13 +13,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class AddingProductToCart {
     private static WebDriver driver;
     private HomePage homePage;
     private ResultsPage resultsPage;
     private ProductPage productPage;
     private CartPage cartPage;
-    private String productTitle;
+    private String expectedResult, actualResult, productTitle;
+
 
     @BeforeTest
     public void setup() {
@@ -36,20 +39,32 @@ public class AddingProductToCart {
     }
 
     @Test (retryAnalyzer = RetryAnalyzer.class)
-    public void testCategorySearch(){
+    public void testSearchFunction(){
         homePage.setSearchTxtBox("car accessories");
         homePage.clickSearchBtn();
+        expectedResult = "\"car accessories\"";
+        actualResult = resultsPage.getSearchResultTitle();
+
+        Assert.assertEquals(actualResult, expectedResult, "Result of search data is wrong");
     }
 
-    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testCategorySearch")
+    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSearchFunction")
     public void testSelectFirstItem(){
+        expectedResult = resultsPage.getProductLink();
         resultsPage.clickProductLink();
+        productTitle = productPage.getProductTitle();
+
+        Assert.assertEquals(productTitle, expectedResult, "The selected item is wrong");
     }
 
     @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSelectFirstItem")
     public void testAddItemToCart(){
-        productTitle = productPage.getProductTitle();
         productPage.clickAddToCartBtn();
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testAddItemToCart")

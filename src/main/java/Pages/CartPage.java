@@ -14,6 +14,6 @@ public class CartPage extends BasePage{
     }
     private By cartProductTitle = By.xpath(("(//span[contains(@class, 'a-truncate-cut')])[1]"));
     public String getCartProductTitle() {
-        return getTextFromElement(cartProductTitle).trim().substring(0,50);
+        return getTextFromElement(cartProductTitle).trim().substring(0,30);
     }
 }

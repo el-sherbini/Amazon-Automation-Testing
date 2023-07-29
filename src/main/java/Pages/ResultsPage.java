@@ -12,6 +12,14 @@ public class ResultsPage extends BasePage{
     public void clickProductLink() {
         clickElement(productLink);
     }
+    public String getProductLink() {
+        return getTextFromElement(productLink).trim().substring(0,30);
+    }
+
+    private By searchResultTitle = By.xpath("//span[@class=\"a-color-state a-text-bold\"]");
+    public String getSearchResultTitle() {
+        return getTextFromElement(searchResultTitle);
+    }
 }
 
 
