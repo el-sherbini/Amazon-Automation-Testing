@@ -1,9 +1,6 @@
 package Tests;
 
-import Pages.CartPage;
-import Pages.HomePage;
-import Pages.ProductPage;
-import Pages.ResultsPage;
+import Pages.*;
 import RetryAnalyzer.RetryAnalyzer;
 import Utils.TestConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -11,12 +8,16 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-public class AddingProductToCart {
+import java.util.concurrent.TimeUnit;
+
+public class AddingTodayDealsWithCategories {
     private static WebDriver driver;
     private HomePage homePage;
-    private ResultsPage resultsPage;
+    private TodayDealsPage todayDealsPage;
     private ProductPage productPage;
     private CartPage cartPage;
     private String productTitle;
@@ -28,7 +29,7 @@ public class AddingProductToCart {
         driver.manage().window().setSize(new Dimension(1024,768));
 
         homePage = new HomePage(driver);
-        resultsPage = new ResultsPage(driver);
+        todayDealsPage = new TodayDealsPage(driver);
         productPage = new ProductPage(driver);
         cartPage = new CartPage(driver);
 
@@ -36,17 +37,33 @@ public class AddingProductToCart {
     }
 
     @Test (retryAnalyzer = RetryAnalyzer.class)
-    public void testCategorySearch(){
-        homePage.setSearchTxtBox("car accessories");
-        homePage.clickSearchBtn();
+    public void testOpenTodayDeals(){
+        homePage.clickTodayDealsBtn();
     }
 
-    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testCategorySearch")
-    public void testSelectFirstItem(){
-        resultsPage.clickProductLink();
+    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testOpenTodayDeals")
+    public void testSelectCategories(){
+        todayDealsPage.clickHeadphonesCheckBox();
+        todayDealsPage.clickGroceryCheckBox();
+        todayDealsPage.clickDiscountBtn();
     }
 
-    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSelectFirstItem")
+    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSelectCategories")
+    public void testSelectFourthPage(){
+        todayDealsPage.clickFourthPageBtn();
+    }
+
+    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSelectFourthPage")
+    public void testSelectProduct() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        todayDealsPage.clickDealsProductTitle();
+    }
+
+    @Test (retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = "testSelectProduct")
     public void testAddItemToCart(){
         productTitle = productPage.getProductTitle();
         productPage.clickAddToCartBtn();

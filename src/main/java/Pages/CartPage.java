@@ -9,7 +9,7 @@ public class CartPage extends BasePage{
     }
 
     private By cartBtn = By.id("nav-cart");
-    public void setCartBtn() {
+    public void clickCartBtn() {
         clickElement(cartBtn);
     }
     private By cartProductTitle = By.xpath(("(//span[contains(@class, 'a-truncate-cut')])[1]"));

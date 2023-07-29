@@ -9,8 +9,9 @@ public class ResultsPage extends BasePage{
     }
 
     private By productLink = By.xpath("(//h2[contains(@class, 'a-size-mini')]//a[contains(@class, 'a-link-normal')]//span[contains(@class, 'a-text-normal')])[1]");
-    public void setProductLink() {
+    public void clickProductLink() {
         clickElement(productLink);
     }
 }
+
 

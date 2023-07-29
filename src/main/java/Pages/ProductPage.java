@@ -9,7 +9,7 @@ public class ProductPage extends BasePage{
     }
 
     private By addToCartBtn = By.id("add-to-cart-button");
-    public void setAddToCartBtn() {
+    public void clickAddToCartBtn() {
         clickElement(addToCartBtn);
     }
 

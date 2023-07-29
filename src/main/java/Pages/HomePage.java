@@ -14,7 +14,12 @@ public class HomePage extends BasePage{
     }
 
     private By searchBtn = By.id("nav-search-submit-button");
-    public void setSrcBtn() {
+    public void clickSearchBtn() {
         clickElement(searchBtn);
+    }
+
+    private By todayDealsBtn = By.xpath("//a[@href='/gp/goldbox?ref_=nav_cs_gb' and normalize-space(text())=\"Today's Deals\"]");
+    public void clickTodayDealsBtn() {
+        clickElement(todayDealsBtn);
     }
 }

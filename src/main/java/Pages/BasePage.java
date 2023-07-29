@@ -1,8 +1,6 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,22 +20,21 @@ public class BasePage {
     }
 
     protected void clickElement(By locator) {
-        findElement(locator).click();
+        WebElement element = findElement(locator);
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
     protected void sendKeysToElement(By locator, String text) {
-        findElement(locator).sendKeys(text);
+        WebElement element = findElement(locator);
+        wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
     }
 
     protected String getTextFromElement(By locator) {
-        return findElement(locator).getText();
+        WebElement element = findElement(locator);
+        return wait.until(ExpectedConditions.visibilityOf(element)).getText();
     }
 
     public void openURL(String url) {
         driver.get(url);
-    }
-
-    protected void takeScreenshot(String filename) {
-
     }
 }
