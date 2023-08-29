@@ -1,12 +1,12 @@
-# Amazon-Test-Automation
-> This is a test automation task for _VOIS on [_Amazon_]https://www.amazon.com/” ) website (E-commerce).
+# Amazon-Automation-Testing
+> This is a test automation project on [_Amazon_]https://www.amazon.com/” ) website (E-commerce).
 
 ## Installation
 
 Clone the repo:
 
 ```sh
-git clone https://github.com/el-sherbini/Amazon-Test-Automation.git
+git clone https://github.com/el-sherbini/Amazon-Automation-Testing.git
 ```
 
 Install dependencies:
