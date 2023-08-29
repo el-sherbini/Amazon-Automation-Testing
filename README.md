@@ -1,5 +1,5 @@
 # Amazon-Automation-Testing
-> This is a test automation project on [_Amazon_]https://www.amazon.com/” ) website (E-commerce).
+> This is a test automation project on [_Amazon_](https://www.amazon.com/) website (E-commerce).
 
 ## Installation
 
